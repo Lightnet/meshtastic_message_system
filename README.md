@@ -27,6 +27,14 @@ pipenv install -r requirements.txt
 pipenv shell
 ```
 
+# Save package:
+```
+pipenv requirements > requirements.txt
+
+pipenv run pip3 freeze > requirements.txt
+```
+ * https://stackoverflow.com/questions/51845562/how-to-freeze-a-requirement-with-pipenv
+
 # run server:
 ```
 flask --app flash_server run

@@ -1,0 +1,2 @@
+Flask==3.0.3
+meshtastic==2.3.4.post1
