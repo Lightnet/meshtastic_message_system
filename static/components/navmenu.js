@@ -8,11 +8,11 @@ function NavMenu(){
 
   return div(
     button({onclick:()=>navigate("/")},' Home '),
-    button({onclick:()=>navigate("/about")},' About '),
-    button({onclick:()=>navigate("/signin")},' Sign In '),
-    button({onclick:()=>navigate("/signup")},' Sign Up'),
-    button({onclick:()=>navigate("/signout")},' Sign Out'),
-    button({onclick:()=>navigate("/account")},' Account '),
+    button({onclick:()=>navigate("/about",{replace:true})},' About '),
+    button({onclick:()=>navigate("/signin",{replace:true})},' Sign In '),
+    button({onclick:()=>navigate("/signup",{replace:true})},' Sign Up'),
+    button({onclick:()=>navigate("/signout",{replace:true})},' Sign Out'),
+    button({onclick:()=>navigate("/account",{replace:true})},' Account '),
   )
 
 }

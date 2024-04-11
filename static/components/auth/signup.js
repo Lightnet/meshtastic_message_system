@@ -6,12 +6,23 @@ const { div, button, input, label, table, tbody, tr, td } = van.tags;
 
 function SignUp(){
 
-  const alias = van.state('');
-  const passphrase1 = van.state('');
+  const alias = van.state('test');
+  const passphrase1 = van.state('pass');
   const passphrase2 = van.state('');
 
-  function btnsign(){
-
+  async function btnsign(){
+    const resp = await fetch('/api/auth/signup',{
+      method:'POST',
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        alias:alias.val,
+        passphrase:passphrase1.val
+      })
+    })
+    const data = await resp.json();
+    console.log(data)
   }
   
   return div(
