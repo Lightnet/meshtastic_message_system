@@ -1,7 +1,7 @@
 import meshtastic
 import meshtastic.serial_interface
 import sqlite3
-
+import jwt
 import flask
 from flask import g, Flask, render_template, send_from_directory, jsonify, request
 # https://stackoverflow.com/questions/59355194/python-flask-error-failed-to-load-module-script-strict-mime-type-checking-i
@@ -41,6 +41,8 @@ def is_not_blank(s):
   return bool(s and not s.isspace())
 
 DATABASE = 'sqlite3.db'
+SECRET = 'SECRET'
+
 # setup database for flask
 def get_db():
     db = getattr(g, '_database', None)
@@ -62,6 +64,12 @@ def close_connection(exception):
 @app.route("/")
 def indexPage():
   #return "<p>Hello, World!</p>"
+  #jwt.decode(encoded_jwt, "secret", algorithms=["HS256"])
+  token = request.cookies.get('token')
+  if token:
+    print("token ENC: ", token)
+    token = jwt.decode(token, "secret", algorithms=["HS256"])
+    print("token parse: ", token)
   return render_template("index.html")
 
 @app.route('/api/auth/signin', methods=['POST'])
@@ -84,11 +92,11 @@ def auth_signin():
         #print("alias: ", result.alias)#nope
         print("alias: ", result[1])
         if result[1] == alias and result[2] == passphrase:
-
+          encoded_jwt = jwt.encode({"alias": result[1], "role":"member"}, "secret", algorithm="HS256")
           #need json here
           resp  = flask.make_response(jsonify({"api":"PASS"}))
           #set cookie
-          resp.set_cookie("name", value="I am cookie")
+          resp.set_cookie("token", value=encoded_jwt)
           #return jsonify({"api":"PASS"})  
           return resp
         return jsonify({"api":"FAIL"})

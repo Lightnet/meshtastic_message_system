@@ -27,6 +27,17 @@
  * static
  * templates
 
+# To Do List:
+ * Account
+   * [ ] sign in
+   * [ ] sign up
+   * [ ] sign out
+   * 
+  * meshtastic
+    * web remote (access board)
+    * serial port (pc, mobile)
+    * bluetooth (pc, mobile)
+
 # Set up DEV:
 ```
 pip3 install --user pipenv

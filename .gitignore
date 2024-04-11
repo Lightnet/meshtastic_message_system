@@ -1,3 +1,4 @@
 .venv
 Pipfile
 sqlite3.db
+Pipfile.lock
